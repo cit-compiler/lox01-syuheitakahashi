@@ -14,7 +14,7 @@ class Scanner {
   private int current = 0;
   private int line = 1;
 
-  /*private static final Map<String, TokenType> keywords;
+  private static final Map<String, TokenType> keywords;
 
   static {
     keywords = new HashMap<>();
@@ -34,7 +34,7 @@ class Scanner {
     keywords.put("true",   TRUE);
     keywords.put("var",    VAR);
     keywords.put("while",  WHILE);
-  }*/
+  }
 
   Scanner(String source) {
     this.source = source;
@@ -95,23 +95,23 @@ class Scanner {
       default:
         if (isDigit(c)) {
           number();
-        }/*else if (isAlpha(c)) {
+        }else if (isAlpha(c)) {
           identifier();
-        }*/ else {
+        } else {
           Lox.error(line, "Unexpected character.");
         }
         break;
     }
   }
 
-  /*private void identifier() {
+  private void identifier() {
     while (isAlphaNumeric(peek())) advance();
-    addToken(IDENTIFIER);
-    /*String text = source.substring(start, current);
+    //addToken(IDENTIFIER);
+    String text = source.substring(start, current);
     TokenType type = keywords.get(text);
     if (type == null) type = IDENTIFIER;
     addToken(type);
-  }*/
+  }
 
 
   private void number() {
@@ -162,7 +162,7 @@ class Scanner {
     return source.charAt(current + 1);
   } 
 
-  /*private boolean isAlpha(char c) {
+  private boolean isAlpha(char c) {
     return (c >= 'a' && c <= 'z') ||
            (c >= 'A' && c <= 'Z') ||
             c == '_';
@@ -170,7 +170,7 @@ class Scanner {
 
   private boolean isAlphaNumeric(char c) {
     return isAlpha(c) || isDigit(c);
-  }*/
+  }
 
   private boolean isDigit(char c) {
     return c >= '0' && c <= '9';
