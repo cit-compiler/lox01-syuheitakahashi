@@ -5,6 +5,8 @@ import java.util.List;
 import static com.craftinginterpreters.lox.TokenType.*;
 
 class Parser {
+  private static class ParseError extends RuntimeException {}
+
   private final List<Token> tokens;
   private int current = 0;
 
@@ -121,6 +123,17 @@ class Parser {
       consume(RIGHT_PAREN, "Expect ')' after expression.");
       return new Expr.Grouping(expr);
     }
+  }
+
+  private ParseError error(Token token, String message) {
+    Lox.error(token, message);
+    return new ParseError();
+  }
+  
+  private Token consume(TokenType type, String message) {
+    if (check(type)) return advance();
+
+    throw error(peek(), message);
   }
 
   
