@@ -161,7 +161,7 @@ class Parser {
       advance();
     }
   }
-  
+
   private Token consume(TokenType type, String message) {
     if (check(type)) return advance();
 
